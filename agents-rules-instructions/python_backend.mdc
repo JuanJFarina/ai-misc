@@ -1,0 +1,48 @@
+# SPECIFIC PYTHON BACKEND GUIDELINES
+
+- Use the `uv run poe lint` command to run pre-commit checks
+
+- Always prefer to "fail fast" and as closer to the root cause as possible.
+
+- Avoid typing anything as 'Any', 'dict', or 'tuple'
+
+- Typing something as optional ('| None') is usually not preferred but may be the best option in certain circumstances
+
+- The architecture consists of four layers: 'api', 'services', 'infrastructure' and 'domain'.
+
+- There is also an utility layer called 'utils'.
+
+- The API layer must:
+  - Only contain API/Server related code.
+  - Only have payload validations.
+  - Only import from itself and Services layer, as well as Utils.
+  - Not contain business logic outside of API validation logic.
+  - Not use try/except logic.
+
+- The Services layer must:
+  - Only import from itself, Infrastructure and Domain layers, as well as Utils.
+  - Contain Services classes that leverage Infrastructure and Domain code.
+  - Contain Pydantic models when needed for improving methods signatures and validation.
+  - Not contain interfaces/abstract classes.
+  - Any output contract with the API layer should depend entirely on data from either Services or Domain models. Whatever data the Services layer returns to the API layer should never be coupled to an Infrastructure model.
+
+- The Infrastructure layer must:
+  - Only import from itself and Domain layers, as well as Utils.
+  - Contain concrete implementations (clients) for Domain interfaces; there shouldn't be clients without Domain interfaces, unless a fake client is not required for some reason.
+  - Contain all required clients for communicating with external systems; these clients should never be manually instantiated, only used in the DI config.
+  - Contain fake versions of all real clients for testing injections.
+  - Contain entities related to data retrieved with the clients.
+  - Contain the dependency injection configuration.
+
+- The Domain layer must:
+  - Only import from itself and Utils.
+  - Contain all purely domain entities.
+  - Contain any validation rules/invariants and business logic relevant to domain entities.
+  - Contain interfaces for external communication; these should be used throughout the codebase for injecting concrete implementations.
+
+- The Utils layer must:
+  - Contain system custom exceptions.
+  - Contain logging code.
+  - Contain profiling code.
+  - Contain environment variable settings code.
+  - Contain any other cross-cutting concern tools/utilies.

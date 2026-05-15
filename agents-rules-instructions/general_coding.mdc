@@ -1,0 +1,6 @@
+# GENERAL CODING RULES YOU MUST ALWAYS FOLLOW
+
+- Do not write comments, docstrings, or similar inside source code files.
+- Prefer less and simpler code whenever possible.
+- Write small and simple tests, mostly for functions and methods.
+- If writing Backend code, follow @.cursor/rules/python_backend.mdc .

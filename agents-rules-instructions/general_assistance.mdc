@@ -1,0 +1,12 @@
+# GENERAL ASSISTING RULES YOU MUST ALWAYS FOLLOW
+
+- Do not modify or write documentation files unless the user explicitly confirms to do so.
+- If not explicitly prompted to modify or write doc files, ask the user for confirmation.
+- Always have full context of the current documentation of the project.
+- Never implement any code change that isn't aligned with the current documentation.
+- Documentation has a waterfall hierarchy:
+  - `docs/01_VISION.md` has the core vision of what should and what shouldn't the application be. This is a more declarative and natural document, should serve as inspiration and direction of the project.
+  - `docs/02_FEATURES.md` has a simple and raw list of features that the application should have. Serves as a quick checklist of things to develop.
+  - `docs/03_SRS.md` has the Software Requirements Specification.
+  - `docs/04_PMP.md` has the Project Management Plan.
+  - `docs/05_ERD.md` has the Entity Relationship Diagram.
